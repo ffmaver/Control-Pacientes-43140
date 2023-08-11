@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Testeo Covid</title>
+
+	<link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+	<header>
+		<h1>CONTROL DE TESTEOS COVID</h1>
+	</header>
+	<main>
+		
+		<div id="registro_inicial">
+			<h2>Ingresar o Registrarme</h2>
+
+			<button type="button" id="ingresar_btn" class="button">Ingresar</button>
+			<button type="button" id="registrarme_btn" class="button">Registrarme</button>
+		</div>
+
+		<div id="login_formulario" style="display: none;">
+			<h2>Ingreso</h2>
+			<form id="login_form">
+				<label for="username_login">ID:</label>
+				<input type="number" id="id_login" required><br><br>
+
+				<label for="password_login">Contraseña:</label>
+				<input type="password" id="password_login" required><br><br>
+
+				<input type="submit" id="login_btn" class="button" value="Ingresar">
+			</form>
+		</div>
+		<div id="registro_formulario" style="display: none;">
+			<h2>Registro</h2>
+			<form id="registro_form">
+				<label for="nombre_registro">Nombre:</label>
+				<input type="text" id="nombre_registro" required><br><br>
+
+				<label for="apellido_registro">Apellido:</label>
+				<input type="text" id="apellido_registro" required><br><br>
+
+				<label for="username_registro">ID (numero de medico):</label>
+				<input type="number" id="username_registro" required min="1"><br><br>
+
+				<label for="password_registro">Contraseña:</label>
+				<input type="password" id="password_registro" required><br><br>
+				<input type="submit" id="registro_btn" class="button" value="Registrarme">
+			</form>
+		</div>
+
+		<div id="mensaje_div" style="display: none;"></div>
+		<button type="button" id="volver_btn" class="button" style="display: none;">Volver al inicio</button>
+		<button type="button" id="mostrar_btns" class="button" style="display: none;">Ver menú</button>
+
+		<ul class="button-list" id="botones_iniciales" style="display: none;">
+			<h2>Presione una de las siguientes opciones</h2>
+			<li><button type="button" id="agregar_btn" class="button">Agregar nuevo paciente</button></li>
+			<li><button type="button" id="mostrar_btn" class="button">Mostrar Pacientes</button></li>
+			<li><button type="button" id="estadistica_btn" class="button">Estadisticas</button></li>
+			<li><button type="button" id="salir" class="button">Salir</button></li>
+		</ul>
+
+		<ul class="button-list" id="botones_pacientes" style="display: none;">
+			<h2>Como desea ver a los pacientes?</h2>
+			<li><button type="button" id="a_z_btn" class="button">A - Z</button></li>
+			<li><button type="button" id="z_a_btn" class="button">Z - A</button></li>
+			<li><button type="button" id="positivos" class="button">POSITIVOS EN COVID</button></li>
+			<li><button type="button" id="negativos" class="button">NEGATIVOS EN COVID</button></li>
+		</ul>
+
+		<div id="formulario" style="display: none;">
+			<h2>Formulario del Paciente</h2>
+
+			<form id="ingreso_paciente_form">
+				<label for="nombre">Nombre:</label>
+				<input type="text" id="nombre" required><br><br>
+
+				<label for="apellido">Apellido:</label>
+				<input type="text" id="apellido" required><br><br>
+
+				<label for="dni">DNI:</label>
+				<input type="number" id="dni" required min="1"><br><br>
+
+				<label for="anio">Año de nacimiento:</label>
+				<input type="number" id="anio" required><br><br>
+
+				<label for="telefono" aria-placeholder="sin espacios">Teléfono:</label>
+				<input type="number" id="telefono"required min="1000000"><br><br>
+
+				<label for="sexo">Sexo:</label>
+				<select id="sexo" required>
+					<option value="F">Femenino</option>
+					<option value="M">Masculino</option>
+					<option value="X">X</option>
+				</select><br><br>
+
+				<h2>Complete los sintomas del paciente</h2>
+
+				<label for="tos">Tos:</label>
+				<select id="tos" required>
+					<option value="true">Si</option>
+					<option value="false">No</option>
+				</select><br><br>
+
+				<label for="mocos">Mocos:</label>
+				<select id="mocos" required>
+					<option value="true">Si</option>
+					<option value="false">No</option>
+				</select><br><br>
+
+				<label for="fiebre">Fiebre:</label>
+				<select id="fiebre" required>
+					<option value="true">Si</option>
+					<option value="false">No</option>
+				</select><br><br>
+
+				<label for="garganta">Dolor de garganta:</label>
+				<select id="garganta" required>
+					<option value="true">Si</option>
+					<option value="false">No</option>
+				</select><br><br>
+
+				<label for="cabeza">Dolor de cabeza:</label>
+				<select id="cabeza" required>
+					<option value="true">Si</option>
+					<option value="false">No</option>
+				</select><br><br>
+
+				<label for="gusto">Falta de gusto:</label>
+				<select id="gusto" required>
+					<option value="true">Si</option>
+					<option value="false">No</option>
+				</select><br><br>
+
+				<label for="olfato">Falta de olfato:</label>
+				<select id="olfato" required>
+					<option value="true">Si</option>
+					<option value="false">No</option>
+				</select><br><br>
+
+				<label for="estrecho">Contacto estrecho:</label>
+				<select id="estrecho" required>
+					<option value="true">Si</option>
+					<option value="false">No</option>
+				</select><br><br>
+
+				<label for="resultado">Resultado Test:</label>
+				<select id="resultado" required>
+					<option value="POSITIVO">Positivo</option>
+					<option value="NEGATIVO">Negativo</option>
+				</select><br><br>
+				<input type="submit" id="agregar_nuevo" class="button" value="Agregar Paciente"><br>
+			</form>
+
+		</div>
+
+		<button type="button" id="volver_menu_btn" class="button" style="display: none;">Volver al menu</button>
+
+		<div id="pacientes" class="div_pacientes"></div>
+		<!-- div que despues uso para mostrar a los pacientes -->
+		<button type="button" id="atras_btn" class="button" style="display: none;">Atras</button>
+
+
+	</main>
+
+	<script src="./clases/cMedico.js"></script>
+	<script src="./clases/cPaciente.js"></script>
+	<script src="main.js"></script>
+
+
+</body>
+
+</html>
