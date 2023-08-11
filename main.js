@@ -107,6 +107,13 @@ signup_form_medico.addEventListener('submit', (e) => {
 			medico.push({ nombre: nombre, apellido: apellido, id: id, pass: pass }); //le pusheo el obejto
 			localStorage.setItem(clave_medico, JSON.stringify(medico));
 			mostrarMensaje("Se registro con exito!");
+			Toastify({
+				text: "Registro exitoso!",
+				duration: 3000,
+				style: {
+					background: "linear-gradient(to right, #4CAF50, #21864e34)"
+				}
+			}).showToast();
 		}
 	}
 
@@ -359,10 +366,10 @@ function estadisticas_pacientes() {
 		return;
 	}
 	let resultados_positivos = 0,
-	resultados_negativos = 0,
-	femenino = 0,
-	masculino = 0,
-	no_bin = 0;
+		resultados_negativos = 0,
+		femenino = 0,
+		masculino = 0,
+		no_bin = 0;
 
 	for (const paciente of pacientesArray) {
 		if (paciente.resultado === "POSITIVO")
@@ -383,6 +390,7 @@ function estadisticas_pacientes() {
 	const porcentaje_nobin = (no_bin / pacientesArray.length) * 100;
 
 	pacientesDiv.innerHTML += `
+	<h1>ESTADISTICAS</h1><br><br>
 	<h3>Porcentaje de resultados positivos: ${porcentaje_positivos.toFixed(2)}%</h3><br>
 	<h3>Porcentaje de resultados negativos: ${porcentaje_negativos.toFixed(2)}%</h3><br>
 	<p>----------------------------------------------------------</p>
