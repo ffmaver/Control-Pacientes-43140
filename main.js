@@ -36,6 +36,7 @@ document.getElementById("registrarme_btn").addEventListener("click", () => {
 
 //-------Clave de localstorage---------
 const clave_medico = "listaMedicos";
+mostrarElemento("registro_inicial");
 
 //--------Ingresar--------
 const loginForm = document.querySelector("#login_form")
@@ -46,13 +47,14 @@ loginForm.addEventListener('submit', (e) => {
 	const users = JSON.parse(localStorage.getItem(clave_medico)) || []
 	const valid_user = users.find(user => user.id === id && user.pass === pass)
 	if (!valid_user) {
-		ocultarElemento("registro_inicial");
 		ocultarElemento("login_formulario");
-		mostrarElemento("volver_btn");
-		return mostrarMensaje("Usuario o contraseña incorrectos");
+		mostrarElemento("registro_inicial");
+		ocultarElemento("volver_btn");
+		return Swal.fire('Usuario o contraseña incorrectos');
 	}
 	else {
-		mostrarMensaje(`Bienvenido ${valid_user.nombre}`);
+		Swal.fire('Bienvenido')
+		//mostrarMensaje(`Bienvenido ${valid_user.nombre}`);
 		ocultarElemento("login_formulario");
 		mostrarElemento("mostrar_btns");
 	}
@@ -70,15 +72,7 @@ document.getElementById("volver_btn").addEventListener("click", () => {
 
 
 });
-function mostrarMensaje(mensaje) { //muestro el mensaje necesario
-	let mensajeDiv = document.getElementById("mensaje_div");
-	mensajeDiv.textContent = mensaje;
-	mensajeDiv.style.display = "block";
-}
-function borrarMensaje() { //borro el mensaje 
-	let mensajeDiv = document.getElementById("mensaje_div");
-	mensajeDiv.style.display = "none";
-}
+
 
 //--------Registrarse-----
 const signup_form_medico = document.querySelector("#registro_form");
@@ -92,28 +86,35 @@ signup_form_medico.addEventListener('submit', (e) => {
 	const medico = JSON.parse(localStorage.getItem(clave_medico)) || [];
 	const es_usuario_registrado = medico.find(medico => medico.id === id);
 	if (es_usuario_registrado) { // si ya existe
-		mostrarElemento("volver_btn");
 		ocultarElemento("registro_formulario");
-		return mostrarMensaje("Ya existe un usuario con ese ID");
+		mostrarElemento("registro_inicial");
+		ocultarElemento("volver_btn");
+		return Swal.fire({
+			icon: 'error',
+			title: 'Oops...',
+			text: 'Ya existe un usuario con ese ID',
+		});
 	} else { //sino chequeo que este ok la info
 		if (mensaje != "") { //si el mensaje contiene algo lo muestro
-			mostrarMensaje(mensaje);
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: mensaje,
+			});
 			mostrarElemento("volver_btn");
 			ocultarElemento("registro_formulario");
 		} else {
-			mostrarMensaje("Se registro con exito!");
 			mostrarElemento("mostrar_btns");
 			ocultarElemento("registro_formulario");
 			medico.push({ nombre: nombre, apellido: apellido, id: id, pass: pass }); //le pusheo el obejto
 			localStorage.setItem(clave_medico, JSON.stringify(medico));
-			mostrarMensaje("Se registro con exito!");
-			Toastify({
-				text: "Registro exitoso!",
-				duration: 3000,
-				style: {
-					background: "linear-gradient(to right, #4CAF50, #21864e34)"
-				}
-			}).showToast();
+			Swal.fire({
+				position: 'center',
+				icon: 'success',
+				title: 'Se registro con exito!',
+				showConfirmButton: false,
+				timer: 1500
+			})
 		}
 	}
 
@@ -171,10 +172,18 @@ signup_form_paciente.addEventListener('submit', (e) => {
 	if (es_paciente_registrado) { //si es un paciente ya registrado
 		ocultarElemento("formulario");
 		mostrarElemento("volver_menu_btn");
-		return mostrarMensaje("Este paciente ya esta ingresado. Intente nuevamente.");
+		return Swal.fire({
+			icon: 'error',
+			title: 'Este paciente ya esta ingresado.',
+			text: 'Intente nuevamente.',
+		});
 	} else {
 		if (mensaje != "") { //si el mensaje contiene algo lo muestro
-			mostrarMensaje(mensaje);
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: mensaje,
+			});
 			mostrarElemento("volver_menu_btn");
 			ocultarElemento("formulario");
 		} else {
@@ -185,7 +194,13 @@ signup_form_paciente.addEventListener('submit', (e) => {
 				fiebre: fiebre, garganta: garganta, cabeza: cabeza, gusto: gusto, olfato: olfato, estrecho: estrecho, resultado: resultado
 			});
 			localStorage.setItem(clave_pacientes, JSON.stringify(paciente));
-			mostrarMensaje("Se registro con exito!");
+			Swal.fire({
+				position: 'center',
+				icon: 'success',
+				title: 'Paciente registrado!',
+				showConfirmButton: false,
+				timer: 1500
+			});
 		}
 	}
 
@@ -201,7 +216,7 @@ function checkear_datos_paciente(nombre, apellido, fecha_nac) {
 	}
 	if (isNaN(fecha_nac) || fecha_nac > hoy.getFullYear || fecha_nac.length != 4)
 		msj += "\nDebe ingresar un año de nacimiento valido (menor que el año actual y con 4 digitos)";
-	return false;
+	return msj;
 }
 
 //-------Mostrar pacientes-------
