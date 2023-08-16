@@ -1,0 +1,52 @@
+{
+  "pacientes": [ 
+    {
+      "nombre": "GASTON",
+      "apellido": "JULILIANO",
+      "dni": 42424242,
+      "nacimiento": 2000,
+      "sexo": "X",
+      "tos": "true",
+      "mocos": "true",
+      "fiebre": "false",
+      "garganta": "true",
+      "cabeza": "true",
+      "gusto":"true",
+      "olfato": "false",
+      "estrecho": "false",
+      "resultado": "NEGATIVO"
+    },
+    {
+      "nombre": "OSCAR",
+      "apellido": "SIRNE",
+      "dni": 10555555,
+      "nacimiento": 1935,
+      "sexo": "M",
+      "tos": "true",
+      "mocos": "true",
+      "fiebre": "false",
+      "garganta": "true",
+      "cabeza": "true",
+      "gusto":"true",
+      "olfato": "false",
+      "estrecho": "true",
+      "resultado": "POSITIVO"
+    },
+    {
+      "nombre": "ANDREA",
+      "apellido": "LANARO",
+      "dni": 12121212,
+      "nacimiento": 1962,
+      "sexo": "F",
+      "tos": "false",
+      "mocos": "false",
+      "fiebre": "false",
+      "garganta": "true",
+      "cabeza": "true",
+      "gusto":"false",
+      "olfato": "false",
+      "estrecho": "false",
+      "resultado": "NEGATIVO"
+    }
+  ]
+}

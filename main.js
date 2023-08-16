@@ -1,4 +1,20 @@
 const hoy = new Date();
+const url = './pacientes.json';
+
+//-------Clave de localstorage---------
+const clave_pacientes = "listaPacientes";
+let pacientes_json = JSON.parse(localStorage.getItem(clave_pacientes)) || []
+//----------Asincronia y Fetch---------------
+if (pacientes_json.length === 0 ) {
+	document.addEventListener('DOMContentLoaded', () => {
+	fetch( url )
+	.then( respuesta => respuesta.json())
+	.then( resultado => {
+	const pacientes_json = resultado.pacientes; //me copio TODOS los que haya en el json
+	localStorage.setItem(clave_pacientes, JSON.stringify(pacientes_json));
+})  
+})
+}
 
 //--------Funciones basicas----------
 function mostrarElemento(elementoId) {
@@ -134,8 +150,7 @@ function checkear_datos(nombre, apellido, pass) {
 }
 
 //-----------Menu----------
-//-------Clave de localstorage---------
-const clave_pacientes = "listaPacientes";
+
 document.addEventListener("DOMContentLoaded", () => {
 	lista_pacientes = JSON.parse(localStorage.getItem(clave_pacientes)) || [];
 
@@ -154,7 +169,6 @@ signup_form_paciente.addEventListener('submit', (e) => {
 	let apellido = document.getElementById("apellido").value.trim().toUpperCase();
 	let dni = document.getElementById("dni").value.trim();
 	let fecha_nac = document.getElementById("anio").value.trim();
-	fecha_nac = hoy.getFullYear() - fecha_nac;
 	let telefono = document.getElementById("telefono").value.trim();
 	let sexo = document.getElementById("sexo").value;
 	let tos = document.getElementById("tos").value;
@@ -190,9 +204,9 @@ signup_form_paciente.addEventListener('submit', (e) => {
 			mostrarElemento("volver_btn");
 			ocultarElemento("formulario");
 			paciente.push({ //pusheo a mi nuevo paciente
-				nombre: nombre, apellido: apellido, dni: dni, fecha_nac: fecha_nac, telefono: telefono, sexo: sexo, tos: tos, mocos: mocos,
+				nombre: nombre, apellido: apellido, dni: dni, fecha_nac: hoy.getFullYear() - fecha_nac, telefono: telefono, sexo: sexo, tos: tos, mocos: mocos,
 				fiebre: fiebre, garganta: garganta, cabeza: cabeza, gusto: gusto, olfato: olfato, estrecho: estrecho, resultado: resultado
-			});
+			}); //lo pusheo con su edad
 			localStorage.setItem(clave_pacientes, JSON.stringify(paciente));
 			Swal.fire({
 				position: 'center',
