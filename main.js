@@ -70,11 +70,9 @@ loginForm.addEventListener('submit', (e) => {
 	}
 	else {
 		Swal.fire('Bienvenido')
-		//mostrarMensaje(`Bienvenido ${valid_user.nombre}`);
 		ocultarElemento("login_formulario");
 		mostrarElemento("mostrar_btns");
 	}
-	//localStorage.setItem(clave_medico, JSON.stringify(valid_user));
 
 })
 document.getElementById("volver_btn").addEventListener("click", () => {

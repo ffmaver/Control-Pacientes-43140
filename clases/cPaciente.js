@@ -15,17 +15,4 @@ class Paciente {
 		this.estrecho = estrecho;
 		this.resultado = resultado;
 	}
-	get_resultado() {
-		return this.resultado;
-	}
-	get_sexo() {
-		return this.sexo;
-	}
-	get_edad() {
-		const hoy = new Date();
-		return (hoy.getFullYear() - this.nacimiento);
-	}
-	get_datos() {
-		return ("<br> <br> Nombre y apellido: " + this.nombre + " " + this.apellido + ". <br> DNI: " + this.dni + ". <br> Edad: "+ this.get_edad()+ ". <br> Sexo: " + this.sexo);
-	}
 }
